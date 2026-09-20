@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ayush .dev | AI & Software Engineer</title>
+  <!-- Three.js CDN for Interactive 3D Cosmic Galaxy -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --bg: #030712;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.4);
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --card-border: rgba(56, 189, 248, 0.15);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+    #canvas3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    header {
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.5px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #38bdf8;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    nav a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent-glow);
+    }
+    .nav-btn-resume {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent) !important;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .nav-btn-resume:hover {
+      background: var(--accent);
+      color: #030712 !important;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .hero {
+      padding: 90px 0 50px;
+      max-width: 840px;
+    }
+    .tag-badge {
+      display: inline-block;
+      color: var(--accent);
+      font-family: monospace;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      text-shadow: 0 0 8px var(--accent-glow);
+    }
+    .hero h1 {
+      font-size: 2.7rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span {
+      color: var(--accent);
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+    }
+    .hero p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .contact-dock {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-mail {
+      background: #0284c7;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 20px rgba(2, 132, 199, 0.4);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-mail:hover {
+      background: #0369a1;
+      transform: translateY(-2px);
+    }
+    .contact-dock a.link-item {
+      color: #f1f5f9;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 9px 15px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .contact-dock a.link-item:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+    .btn-download-resume {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(2, 132, 199, 0.4));
+      border: 1px solid rgba(56, 189, 248, 0.6) !important;
+      color: #fff !important;
+      font-weight: 600 !important;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+    }
+    .btn-download-resume:hover {
+      background: var(--accent) !important;
+      color: #030712 !important;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.6) !important;
+    }
+    section {
+      padding: 50px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    h2.sec-heading {
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2.sec-heading::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--accent);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 24px;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
+    }
+    .glass-card h3 {
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .glass-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--accent);
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .timeline-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .t-company {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .t-date {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .t-role {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    ul.t-list {
+      margin-left: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    ul.t-list li {
+      margin-bottom: 4px;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .cert-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .cert-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .cert-issuer {
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 40px;
+    }
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2.1rem; }
+      header { flex-direction: column; align-items: flex-start; gap: 14px; }
+      nav { flex-wrap: wrap; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Three.js Canvas for Interactive Cosmic Galaxy -->
+  <canvas id="canvas3d"></canvas>
+
+  <div class="wrapper">
+    <header>
+      <div class="logo"><div class="dot"></div> ayush .dev</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="Ayush_Kumar_Singh_Resume.pdf" download class="nav-btn-resume">&#128196; Resume</a>
+      </nav>
+    </header>
+
+    <!-- HERO & DIRECT ACTION DOCK -->
+    <div class="hero" id="about">
+      <div class="tag-badge">&lt;Available for Opportunities /&gt;</div>
+      <h1>
+        Actively seeking <span>Artificial Intelligence (AI)</span>, <span>Machine Learning</span>, and <span>Backend Engineer</span> opportunities.
+      </h1>
+      <p>
+        Undergraduate engineer at ABESIT building high-throughput edge computer vision pipelines, autonomous LangGraph workflows, and scalable REST backends. Experienced with NVIDIA DGX A100 infrastructure and ONNX inference.
+      </p>
+
+      <div class="contact-dock">
+        <!-- Direct Email -->
+        <a href="mailto:ayushkumarsingh683@gmail.com" class="btn-mail">
+          &#9993; ayushkumarsingh683@gmail.com
+        </a>
+        
+        <!-- Phone -->
+        <a href="tel:+917002098294" class="link-item">
+          &#128222; +91 7002098294
+        </a>
+        
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/ayush-kumar-singh-tech/" target="_blank" class="link-item">
+          LinkedIn
+        </a>
+        
+        <!-- GitHub -->
+        <a href="https://github.com/ayushkumarsingh683-sys" target="_blank" class="link-item">
+          GitHub
+        </a>
+
+        <!-- Download Resume Button -->
+        <a href="Ayush_Kumar_Singh_Resume.pdf" download class="link-item btn-download-resume">
+          &#128229; Download Resume
+        </a>
+      </div>
+    </div>
+
+    <!-- WORK EXPERIENCE -->
+    <section id="experience">
+      <h2 class="sec-heading">Work Experience & Training</h2>
+      
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="t-company">Global Infoventures (GI Infoventures)</span>
+          <span class="t-date">August 2026 &ndash; Present</span>
+        </div>
+        <div class="t-role">AI & High-Performance Computing (HPC) Trainee | ABESIT Ghaziabad</div>
+        <ul class="t-list">
+          <li>Managing ML training workflows on enterprise NVIDIA DGX A100 infrastructure via Kubeflow.</li>
+          <li>Engineered CV datasets on Roboflow for object detection and multi-instance GPU inference.</li>
+          <li>Containerized workloads and execution dependencies using Docker.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="t-company">KB QUBE</span>
+          <span class="t-date">Machine Learning Intern</span>
+        </div>
+        <div class="t-role">Dibrugarh, Assam, India</div>
+        <ul class="t-list">
+          <li>Engineered automated data cleaning and preprocessing pipelines with Python and Pandas.</li>
+          <li>Trained, evaluated, and validated predictive classification models with Scikit-Learn.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="sec-heading">Featured Projects</h2>
+      <div class="grid">
+        <div class="glass-card">
+          <h3>Real-Time Edge Traffic Analytics</h3>
+          <p>
+            Edge CV pipeline utilizing YOLO11 Nano and ByteTrack for multi-class vehicle detection, velocity calculation, and overspeed infraction logging at steady 45+ FPS.
+          </p>
+          <div class="tags">
+            <span class="tag">YOLO11</span>
+            <span class="tag">ByteTrack</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">ONNX</span>
+            <span class="tag">Roboflow</span>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <h3>Autonomous Multi-Agent AI Travel Orchestrator</h3>
+          <p>
+            LangGraph multi-agent architecture with specialized flight, hotel, and itinerary agents. Configured with PostgreSQL persistent memory checkpoints and Groq (Llama 3) runtime.
+          </p>
+          <div class="tags">
+            <span class="tag">LangGraph</span>
+            <span class="tag">Groq (Llama 3)</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Tavily Search</span>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <h3>Sovereign AI Workbench</h3>
+          <p>
+            Industrial AI platform leveraging local LLMs (Ollama, Moondream) for technical schematic inspection, mechanical anomaly detection, and asynchronous FastAPI inference.
+          </p>
+          <div class="tags">
+            <span class="tag">FastAPI</span>
+            <span class="tag">LangChain</span>
+            <span class="tag">Ollama</span>
+            <span class="tag">Moondream</span>
+            <span class="tag">MongoDB</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS -->
+    <section id="skills">
+      <h2 class="sec-heading">Technical Stack</h2>
+      <div class="grid">
+        <div class="glass-card">
+          <h3>Languages & Web</h3>
+          <p>Python, Java, C, JavaScript (ES6+), HTML5, CSS3, Streamlit</p>
+        </div>
+        <div class="glass-card">
+          <h3>Computer Vision & AI</h3>
+          <p>OpenCV, YOLO11, Roboflow, ByteTrack, ONNX Runtime, Scikit-Learn</p>
+        </div>
+        <div class="glass-card">
+          <h3>Agentic AI & LLMs</h3>
+          <p>LangGraph, LangChain, Ollama (Qwen 2.5), Moondream, Prompt Engineering</p>
+        </div>
+        <div class="glass-card">
+          <h3>Backend & Infrastructure</h3>
+          <p>FastAPI, PostgreSQL, MongoDB, Docker, NVIDIA DGX A100 / Kubeflow</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2 class="sec-heading">Education</h2>
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="t-company">ABES Institute of Technology (AKTU)</span>
+          <span class="t-date">2024 &ndash; 2028 | Ghaziabad, India</span>
+        </div>
+        <div class="t-role">Bachelor of Technology &ndash; Computer Science and Engineering (Artificial Intelligence)</div>
+        <p style="color: var(--accent); font-size: 0.9rem; font-weight: 600;">Current SGPA: 7.13 / 10.0</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="t-company">Sampoorna Kendra Vidyalaya (CBSE)</span>
+          <span class="t-date">Dibrugarh, Assam, India</span>
+        </div>
+        <div class="t-role">Secondary & Higher Secondary Education</div>
+        <p style="color: var(--muted); font-size: 0.88rem;">
+          Senior Secondary (Class XII): <b style="color: #fff;">72.0%</b> &nbsp;|&nbsp; Secondary (Class X): <b style="color: #fff;">84.0%</b>
+        </p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+      <h2 class="sec-heading">Certifications & Credentials</h2>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-title">AI/ML for Geodata Analytics</div>
+          <div class="cert-issuer">ISRO / IIRS Dehradun</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Foundations of Prompt Engineering</div>
+          <div class="cert-issuer">Amazon Web Services (AWS)</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Trust & Security with Google Cloud</div>
+          <div class="cert-issuer">Google Cloud & Simplilearn</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Data Analytics Job Simulation</div>
+          <div class="cert-issuer">Deloitte (Forage)</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">MasterClass in Full Stack Development</div>
+          <div class="cert-issuer">NoviTech R&D Pvt. Ltd.</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">AI for Business Professionals</div>
+          <div class="cert-issuer">HP LIFE Foundation</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>&copy; 2026 Ayush Kumar Singh. All rights reserved.</span>
+      <span>AI & Backend Portfolio</span>
+    </footer>
+  </div>
+
+  <!-- Three.js Cosmic Galaxy & Dynamic Starfield Script -->
+  <script>
+    const canvas = document.getElementById('canvas3d');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 80;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Moving Galaxy Stars
+    const starCount = 2000;
+    const starGeometry = new THREE.BufferGeometry();
+    const starPositions = new Float32Array(starCount * 3);
+    const starColors = new Float32Array(starCount * 3);
+
+    for (let i = 0; i < starCount * 3; i += 3) {
+      starPositions[i] = (Math.random() - 0.5) * 320;
+      starPositions[i + 1] = (Math.random() - 0.5) * 320;
+      starPositions[i + 2] = (Math.random() - 0.5) * 320;
+
+      // Deep cyan/blue & bright stellar tint
+      starColors[i] = 0.2 + Math.random() * 0.3;
+      starColors[i + 1] = 0.65 + Math.random() * 0.35;
+      starColors[i + 2] = 0.95 + Math.random() * 0.05;
+    }
+
+    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+    const starMaterial = new THREE.PointsMaterial({
+      size: 1.25,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85
+    });
+
+    const starField = new THREE.Points(starGeometry, starMaterial);
+    scene.add(starField);
+
+    // Cosmic Wireframe Sphere
+    const sphereGeo = new THREE.IcosahedronGeometry(18, 2);
+    const sphereMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.22
+    });
+    const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+    sphere.position.set(38, 12, 0);
+    scene.add(sphere);
+
+    // Mouse Parallax
+    let mouseX = 0;
+    let mouseY = 0;
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // Resize Event
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Continuous Frame Animation
+    function animate() {
+      requestAnimationFrame(animate);
+
+      starField.rotation.y += 0.0006;
+      starField.rotation.x += 0.0002;
+
+      sphere.rotation.x += 0.003;
+      sphere.rotation.y += 0.004;
+
+      camera.position.x += (mouseX * 8 - camera.position.x) * 0.03;
+      camera.position.y += (mouseY * 8 - camera.position.y) * 0.03;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
