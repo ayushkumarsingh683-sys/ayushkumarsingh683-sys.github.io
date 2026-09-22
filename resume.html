@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ayush Kumar Singh - Resume</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 9mm 13mm 9mm 13mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9.1pt;
+      line-height: 1.34;
+      color: #0f172a;
+      background-color: #fff;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 9px;
+    }
+    .name {
+      font-size: 18.5pt;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #020617;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .contact-line {
+      font-size: 8.9pt;
+      color: #334155;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4.5px;
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+    }
+    .contact-item.link {
+      color: #0284c7;
+      font-weight: 600;
+    }
+    .contact-item.link:hover {
+      text-decoration: underline;
+      color: #0369a1;
+    }
+    .icon {
+      width: 12.5px;
+      height: 12.5px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+    .section {
+      margin-top: 8px;
+    }
+    .section-title {
+      font-size: 9.7pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #090d16;
+      border-bottom: 1.4px solid #0f172a;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+    }
+    .entry {
+      margin-bottom: 5px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .project-header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+    .bold-title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 9.3pt;
+    }
+    .project-gh-link {
+      color: #0284c7;
+      text-decoration: none;
+      font-size: 8.5pt;
+      font-weight: 700;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .project-gh-link:hover {
+      text-decoration: underline;
+      color: #0369a1;
+    }
+    .role-title {
+      font-weight: 600;
+      font-style: italic;
+      color: #334155;
+      font-size: 8.8pt;
+    }
+    .date-location {
+      font-size: 8.6pt;
+      font-weight: 600;
+      color: #475569;
+      text-align: right;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tech-stack {
+      font-size: 8.4pt;
+      font-style: italic;
+      color: #475569;
+      margin-bottom: 2px;
+    }
+    ul {
+      margin-left: 15px;
+      margin-top: 2px;
+    }
+    li {
+      margin-bottom: 1.8px;
+      font-size: 8.7pt;
+      color: #1e293b;
+      line-height: 1.32;
+    }
+    .skills-category {
+      font-size: 8.7pt;
+      margin-bottom: 2.5px;
+      line-height: 1.31;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 15px;
+      row-gap: 2.5px;
+      margin-top: 2px;
+    }
+    .cert-item {
+      font-size: 8.6pt;
+      line-height: 1.28;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="name">AYUSH KUMAR SINGH</div>
+    
+    <div class="contact-line">
+      <!-- Phone -->
+      <a href="tel:+917002098294" class="contact-item">
+        <svg class="icon" viewBox="0 0 24 24" style="color:#ef4444;"><path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25 1.12.37 2.32.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.01l-2.2 2.22z"/></svg>
+        +91 7002098294
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:ayushkumarsingh683@gmail.com" class="contact-item">
+        <svg class="icon" viewBox="0 0 24 24" style="color:#0f172a;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        ayushkumarsingh683@gmail.com
+      </a>
+
+      <!-- Portfolio -->
+      <a href="https://ayushkumarsingh683-sys.github.io/" target="_blank" class="contact-item link">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        Portfolio
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/ayush-kumar-singh-tech/" target="_blank" class="contact-item link">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z"/></svg>
+        LinkedIn
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/ayushkumarsingh683-sys" target="_blank" class="contact-item link">
+        <svg class="icon" viewBox="0 0 24 24" style="color:#0f172a;"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+
+      <!-- Location -->
+      <span class="contact-item">
+        <svg class="icon" viewBox="0 0 24 24" style="color:#ef4444;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        NCR, India
+      </span>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="entry">
+      <div class="row">
+        <span class="bold-title">ABES Institute of Technology (AKTU)</span>
+        <span class="date-location">2024 &ndash; 2028 | Ghaziabad, India</span>
+      </div>
+      <div class="row">
+        <span class="role-title">Bachelor of Technology in Computer Science and Engineering (Artificial Intelligence)</span>
+        <span class="date-location">Current SGPA: 7.13 / 10.0</span>
+      </div>
+    </div>
+    <div class="entry" style="margin-top: 2px;">
+      <div class="row">
+        <span class="bold-title">Sampoorna Kendra Vidyalaya (CBSE)</span>
+        <span class="date-location">Dibrugarh, Assam, India</span>
+      </div>
+      <div class="skills-category">
+        Senior Secondary (Class XII): <b>72.0%</b> &nbsp;|&nbsp; Secondary (Class X): <b>84.0%</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-category"><b>Frontend & Web:</b> HTML5, CSS3, JavaScript (ES6+), Streamlit, Responsive UI Design</div>
+    <div class="skills-category"><b>Backend & REST APIs:</b> FastAPI, Python, Asynchronous Programming, RESTful Architecture, Pydantic V2, Uvicorn</div>
+    <div class="skills-category"><b>Computer Vision & AI:</b> OpenCV, YOLO11, Object Detection, Roboflow (Annotation & Augmentation), NumPy, Pandas, Scikit-Learn</div>
+    <div class="skills-category"><b>Agentic Workflows & LLMs:</b> LangGraph, LangChain, Multi-Agent Systems, Local LLMs (Ollama, Qwen 2.5), Moondream, Prompt Engineering</div>
+    <div class="skills-category"><b>Databases & Cloud:</b> PostgreSQL, MongoDB, MySQL Workbench, SQLModel, Schema Normalization, Google Cloud Security</div>
+    <div class="skills-category"><b>DevOps, Hardware & Tools:</b> NVIDIA DGX A100 / Kubeflow, Docker, Git, GitHub, Linux/Bash, VS Code, Cursor</div>
+  </div>
+
+  <!-- WORK EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+
+    <div class="entry">
+      <div class="row">
+        <span class="bold-title">Global Infoventures (GI Infoventures)</span>
+        <span class="date-location">Ghaziabad, India</span>
+      </div>
+      <div class="row">
+        <span class="role-title">AI & High-Performance Computing (HPC) Trainee</span>
+        <span class="date-location">August 2026 &ndash; Present</span>
+      </div>
+      <div class="tech-stack">Computer Vision | Kubeflow | NVIDIA DGX A100 | Object Detection | Roboflow | Docker</div>
+      <ul>
+        <li>Configured and managed ML workflows on enterprise <b>NVIDIA DGX A100</b> infrastructure via Kubeflow notebook servers.</li>
+        <li>Engineered computer vision datasets via <b>Roboflow</b> for annotation, preprocessing, and augmentation to train detection models.</li>
+        <li>Implemented real-time inference workflows using <b>OpenCV</b>, benchmarking performance across CPU and MIG GPU slices.</li>
+        <li>Containerized training workloads and runtime dependencies using <b>Docker</b> for isolated, reproducible execution.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="row">
+        <span class="bold-title">KB QUBE</span>
+        <span class="date-location">Dibrugarh, Assam, India</span>
+      </div>
+      <div class="row">
+        <span class="role-title">Machine Learning Intern</span>
+        <span class="date-location">1 Month</span>
+      </div>
+      <div class="tech-stack">Python | Machine Learning Algorithms | Data Preprocessing | Scikit-Learn | Predictive Modeling</div>
+      <ul>
+        <li>Completed practical ML assignments focused on supervised/unsupervised algorithms and structured dataset preprocessing.</li>
+        <li>Built automated data cleaning, missing-value imputation, and feature scaling pipelines using <b>Python</b> and <b>Pandas</b>.</li>
+        <li>Trained and validated predictive classification models using <b>Scikit-Learn</b>, evaluating precision, recall, and accuracy.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KEY PROJECTS -->
+  <div class="section">
+    <div class="section-title">Key Projects</div>
+
+    <!-- Project 1: Edge Traffic -->
+    <div class="entry">
+      <div class="row">
+        <div class="project-header-left">
+          <span class="bold-title">Real-Time Edge Traffic Analytics Pipeline</span>
+          <a href="https://github.com/ayushkumarsingh683-sys/edge-traffic-surveillance-system" target="_blank" class="project-gh-link">[GitHub]</a>
+        </div>
+        <span class="date-location">Python | YOLO11 | ByteTrack | OpenCV | ONNX</span>
+      </div>
+      <ul>
+        <li>Engineered an end-to-end edge CV pipeline detecting, tracking, and classifying vehicles from 1080p surveillance feeds.</li>
+        <li>Integrated <b>YOLO11 Nano</b> with <b>ONNX Runtime</b> and multi-threaded stream ingestion, sustaining stable <b>45+ FPS</b> inference.</li>
+        <li>Implemented <b>ByteTrack</b> for persistent tracking and built dual virtual tripwires to calculate vehicle velocity (km/h).</li>
+        <li>Automated telemetry extraction logging track IDs, timestamps, speeds, and infraction flags into structured data sinks.</li>
+      </ul>
+    </div>
+
+    <!-- Project 2: AI Travel -->
+    <div class="entry">
+      <div class="row">
+        <div class="project-header-left">
+          <span class="bold-title">Autonomous Multi-Agent AI Travel Orchestrator</span>
+          <a href="https://github.com/ayushkumarsingh683-sys/ECOVOYAGE-A-MULTIAGENT-TRAVEL-PLANNER-WITH-LANG-GRAPH" target="_blank" class="project-gh-link">[GitHub]</a>
+        </div>
+        <span class="date-location">Python | LangGraph | Groq (Llama 3) | PostgreSQL</span>
+      </div>
+      <ul>
+        <li>Architected a multi-agent system in <b>LangGraph</b> featuring 4 agents: Flight, Hotel, Itinerary, and Final Aggregator.</li>
+        <li>Integrated live tool calling via <b>Tavily Search</b> and travel APIs for dynamic rate discovery, route mapping, and scheduling.</li>
+        <li>Configured shared state memory (<code>TravelState</code>) with <b>PostgreSQL</b> persistence to preserve context across multi-turn sessions.</li>
+        <li>Deployed <b>Groq LPU</b> (Llama 3) runtime for ultra-low latency response synthesis, cutting generation delay by 40%.</li>
+      </ul>
+    </div>
+
+    <!-- Project 3: Sovereign AI -->
+    <div class="entry">
+      <div class="row">
+        <div class="project-header-left">
+          <span class="bold-title">Sovereign AI Workbench & Industrial Inspection</span>
+          <a href="https://github.com/ayushkumarsingh683-sys/SOVEREIGN_AI_WORKBENCH_SIH" target="_blank" class="project-gh-link">[GitHub]</a>
+        </div>
+        <span class="date-location">FastAPI | LangChain | Ollama | Moondream | MongoDB</span>
+      </div>
+      <ul>
+        <li>Engineered an on-premise industrial AI system leveraging local LLMs and vision models for private technical document analysis.</li>
+        <li>Implemented a multi-agent pipeline using <b>LangChain</b> and <b>Ollama</b> to automate component extraction and risk scoring.</li>
+        <li>Deployed multimodal vision models (<b>Moondream / LLaVA</b>) to detect mechanical anomalies in industrial diagrams.</li>
+        <li>Exposed inference via asynchronous <b>FastAPI</b> endpoints with Pydantic payload validation and MongoDB persistence.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="section">
+    <div class="section-title">Certifications & Professional Training</div>
+    <div class="cert-grid">
+      <div class="cert-item">&bull; <b>AI/ML for Geodata Analytics</b> &ndash; ISRO / IIRS</div>
+      <div class="cert-item">&bull; <b>Foundations of Prompt Engineering</b> &ndash; AWS</div>
+      <div class="cert-item">&bull; <b>Trust & Security with Google Cloud</b> &ndash; Google Cloud</div>
+      <div class="cert-item">&bull; <b>Data Analytics Job Simulation</b> &ndash; Deloitte (Forage)</div>
+      <div class="cert-item">&bull; <b>Full Stack Development MasterClass</b> &ndash; NoviTech R&D</div>
+      <div class="cert-item">&bull; <b>AI for Business Professionals</b> &ndash; HP LIFE Foundation</div>
+    </div>
+  </div>
+
+</body>
+</html>
